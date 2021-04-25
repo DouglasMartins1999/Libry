@@ -1,0 +1,8 @@
+{ 
+    "host": "Seu provedor SMTP", 
+    "port": 587, 
+    "auth": { 
+        "user": "Seu email", 
+        "pass": "Sua Senha" 
+    }
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#F4F4F4"/>
+    <title>Libry Converter: by Calibre</title>
+    <link rel="manifest" href="./web.json">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Hind:wght@300;400;500;600&display=swap" rel="stylesheet"> 
+    <link rel="shortcut icon" href="./icon.png" />
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <form id="info">
+        <input name="id" type="text">
+        <input name="book" type="file" id="book" accept=".epub,.azw,.mobi,.html,.txt">
+        <input name="dest" type="text" value="mobi">
+        <input name="external" type="url">
+
+    <div class="page centered active" id="start">
+        <h1>Vamos começar!</h1>
+        <p>Você pode editar as informações do seu livro antes de efetuar a conversão. Assim você mantém sua biblioteca sempre organizada</p>
+
+        <button onclick="navigate('search')">Edite antes de converter</button>
+        <button onclick="routeConversion()" class="secondary">Só quero converter</button>
+    </div>
+
+    <div class="page" id="search">
+        <h2>Escolha seu livro</h2>
+        <p>Use o campo abaixo para pesquisar seu livro. Se tiver várias opções, escolha a que mais te agrada.</p>
+
+        <input placeholder="Qual o título do seu livro?" id="searcher">
+        
+        <div class="book-grid"></div>
+        <div class="alert" id="notfound">Opps... Não encontrei um livro com esse nome :(</div>
+    </div>
+
+    <div class="page" id="detail">
+        <h2>Está tudo certo?</h2>
+        <p>Confira as informações do seu livro antes de iniciar a conversão</p>
+
+        <img id="cover">
+        <div class="tabled">
+            <b>Título: </b><span id="title"></span><br/>
+            <b>Autor: </b><span id="author"></span><br/>
+            <b>Editora: </b><span id="publisher"></span><br/>
+            <b>Lançado em: </b><span id="released"></span><br/>
+            <b>ISBN: </b><span id="ISBN"></span><br/>
+            <b>Páginas: </b><span id="pages"></span><br/>
+            <b>Descrição: </b><span id="description"></span><br/>
+        </div>
+
+        <button onclick="routeConversion()">Sim, tudo certo com meu livro</button>
+        <button onclick="navigate('search')" class="outline">Oops, quero voltar e escolher outro</button>
+        <button onclick="navigate('editor')" class="secondary">Quero editar manualmente</button>
+    </div>
+
+    <div class="page" id="editor">
+        <h2>Editar manualmente</h2>
+        <p>Edite manualmente as informações do seu livro</p>
+
+        <label>Capa:</label>
+        <input type="url" id="coverEdit">
+
+        <label>Título:</label>
+        <input type="text" id="titleEdit">
+
+        <label>Autor (Separados por "&"):</label>
+        <input type="text" id="authorEdit">
+
+        <label>Editora:</label>
+        <input type="text" id="publisherEdit">
+
+        <label>Data de Lançamento:</label>
+        <input type="datetime-local" id="releasedEdit">
+
+        <label>ISBN:</label>
+        <input type="number" id="ISBNEdit" minlength="10" maxlength="13">
+
+        <label>Nº de Páginas:</label>
+        <input type="number" id="pagesEdit" minlength="1">
+
+        <label>Descrição:</label>
+        <textarea id="descriptionEdit" rows="6"></textarea>
+
+        <label></label>
+        <button onclick="editor()">Confirmar Alterações</button>
+        <button class="outline" onclick="navigate('detail')">Descartar Mudanças</button>
+    </div>
+
+    <div class="page centered" id="picker">
+        <h2>Qual o arquivo que você quer converter?</h2>
+        <p>Clique no botão abaixo para escolher</p>
+
+        <label class="picker" for="book">
+            <span>Escolher livro...</span>
+            <span class="choosed" id="selectedfile"></span>
+        </label>
+
+        <button class="actioners" onclick="convert()" disabled="true">Converta meu livro!</button>
+        <button class="actioners outline" onclick="sendMail()" disabled>Enviar para meu Kindle</button>
+        <button class="actioners secondary" onclick="navigate('detail')" disabled>Editar informações</button>
+    </div>
+
+    <div class="page centered active" id="external">
+        <h2>Arquivo externo encontrado!</h2>
+        <p>Se entendemos bem, você quer manipular o arquivo desse link:</p>
+
+        <label class="picker">
+            <span class="choosed" id="uri"></span>
+        </label>
+
+        <button onclick="convert()">Isso! Converta esse livro!</button>
+        <button class="outline" onclick="sendMail()">Apenas envie ao meu Kindle</button>
+        <button class="secondary" onclick="navigate('detail')">Quero editá-lo antes</button>
+    </div>
+
+    <div class="page centered" id="awaiting">
+        <h1 id="awaiter">Aguarde...</h1>
+        <p>Estamos processando seu livro</p>
+
+        <div class="progress"><div></div></div>
+        <div class="process">Enviando Livro... (1%)</div>
+    </div>
+
+    <div class="page centered" id="converted">
+        <h1>Perfeito!</h1>
+        <p>Seu livro foi convertido com sucesso</p>
+
+        <a id="downloader" class="btn">Baixar agora</a>
+        <button onclick="reseter()" class="secondary">Converter outro livro</button>
+    </div>
+
+    <div class="page" id="sendmail">
+        <h2>Okay, vamos enviar</h2>
+        <p>Qual o email do seu aparelho?</p>
+
+        <input placeholder="Insira o email do seu kindle" name="mail" id="mailer">
+        <button onclick="convert('mailed')">Envie meu livro!</button>
+
+        <span class="alert">OBS: É importante que você autorize o nosso email a enviar conteúdo para seu aparelho antes de efetuar a conversão. Saiba mais <a href="https://www.amazon.com.br/gp/help/customer/display.html?nodeId=GX9XLEVV8G4DB28H" target="_blank">aqui</a>.</span>
+    </div>
+
+    <div class="page centered" id="mailed">
+        <h1>Tudo certo,<br> já foi enviado!</h1>
+        <p>Em alguns instantes, seu livro estará disponível no seu Kindle. Obrigado por usar esse serviço</p>
+
+        <button onclick="reseter(true)">Converter outro livro</button>
+    </div>
+
+    <div class="page centered" id="error">
+        <h1>Oops...</h1>
+        <p>Aconteceu um pequeno problema ao processar seu livro :(<br>Verifique seu envio e tente novamente...</p>
+
+        <button onclick="reseter(true)" class="outline">Converter outro livro</button>
+    </div>
+
+    </form>
+    <script src="./script.js"></script>
+</body>
+</html>

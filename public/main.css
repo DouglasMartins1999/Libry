@@ -1,0 +1,215 @@
+* {
+    font-family: 'Hind', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #fefefe;
+}
+
+.page {
+    width: 100%;
+    max-width: 900px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 10vw;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: none;
+}
+
+.page.active {
+    display: flex;
+}
+
+.centered {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1, h2 {
+    margin: 0;
+    font-family: 'Bitter', serif;
+    margin-bottom: 10px;
+    line-height: 1.15;
+}
+
+p {
+    margin: 0;
+    font-size: .9rem;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+button, .btn {
+    width: 100%;
+    background: rgb(14, 173, 236);
+    color: #FFF;
+    font-size: 14px;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin-top: 5px;
+    transition: all ease 500ms;
+}
+
+.btn:active,
+button:active {
+    opacity: 0.6;
+}
+
+button.secondary {
+    background: transparent;
+    color:  rgb(14, 173, 236);
+    padding: 8px 0;
+}
+
+button.outline {
+    border: 1px solid #0eadec;
+    color: rgb(14, 173, 236);
+    background: transparent;
+}
+
+button:disabled {
+    background: #CCC;
+    cursor: not-allowed;
+}
+
+button.secondary:disabled,
+button.outline:disabled {
+    background: transparent;
+    border-color: #CCC;
+    color: #999;
+}
+
+input, textarea {
+    background: transparent;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 8px 10px;
+    outline: none;
+    transition: all ease 300ms;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgb(14, 173, 236);
+}
+
+label {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 12px;
+    color: #333;
+}
+
+a {
+    color: rgb(14, 173, 236);
+    text-decoration: none;
+}
+
+.tabled {
+    font-size: 14px;
+    padding: 20px 12px;
+}
+
+.tabled span {
+    color: #888
+}
+
+.alert {
+    background: rgba(0, 0, 0, 0.09);
+    border-radius: 5px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #666;
+    margin-top: 20px;
+}
+
+img {
+    border-radius: 5px;
+}
+
+.book-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px
+}
+
+.book-grid img {
+    width: 100%;
+}
+
+form > input {
+    display: none;
+}
+
+.picker {
+    width: 100%;
+    padding: 37px;
+    border: 2px dashed #BBB;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 10px 0;
+    color: #777;
+}
+
+#awaiter {
+    margin-bottom: 2px;
+}
+
+.progress {
+    width: 90%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #EEE;
+    margin: 0 auto;
+    position: relative;
+}
+
+.progress > div {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #6935db, #0eadec);
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    transition: all ease 300ms;
+}
+
+.process {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+.picker .choosed {
+    display: block;
+    font-size: 13px;
+    color: rgb(14, 173, 236);
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+#notfound {
+    display: none;
+}
+
+#awaiter {
+    width: 150px;
+    text-align: left;
+}
