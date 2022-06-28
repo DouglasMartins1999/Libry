@@ -7,7 +7,7 @@ const utils = require("util");
 const nm = require('nodemailer');
 const axios = require("axios");
 const moment = require("moment");
-const mailconf = require("./mail.conf.json");
+const mailconf = require("./config/mail.conf.json");
 
 const allowedExt = ["LIT", "MOBI", "AZW", "EPUB", "AZW3", "AZW4", "FB2", "FBZ", "DOCX", "HTML", "PRC", "ODT", "RTF", "PDB", "TXT"];
 const booksAPI = {
