@@ -1,16 +1,27 @@
 # Libry
 
-#### Editor Online de eBooks
+O **Libry** - trocadilho com as palavras *Livro* e *Libre* - é um aplicativo online minimalista para converter livros digitais a partir de diversos formatos (ex .epub, .azw, .fb2, .htmlz, entre outros) para a extensão .mobi, com o intuito de facilitar o envio de ebooks para o Kindle - leitor de ebooks da Amazon.
 
-O Libry é um projeto desenvolvido em Node.JS que se utiliza do gerenciador de ebooks [Calibre](https://calibre-ebook.com/) para efetuar operações básicas de conversão e edição de metadados de livros digitais. Possui em essência três features:
+Não obstante, o aplicativo também possibilita:
 
-- Conversão de livros para o formato .mobi
-- Edição manual ou automática de metadados, com base nos dados disponíveis pela [Google Books API](https://developers.google.com/books/)
-- Envio do arquivo modificado por email para dispositivos Kindle, através do [nodemailer](nodemailer.com)
-
+- editar informações do livro, incluindo imagem da capa e outros metadados, inserindo-os manualmente ou consultando-os na base de dados do Google Books.
+- enviar o ebook convertido diretamente ao Kindle, over-the-air, via email.
 
 
-A motivação para o desenvolvimento dessa ferramenta advém da dificuldade de enviar ao Kindle livros digitais encontrados fora da loja da Amazon. Uma versão de demonstração pode ser encontrada em http://libry.atenz.xyz. Os passos abaixo fornecem um passo-a-passo para a execução da ferramenta em ambiente próprio. 
+
+![Libry](https://i.imgur.com/8NHBBKl.jpg)
+
+
+
+Tecnicamente, a aplicação web do Libry foi construída usando Node.JS, a qual invoca a linha de comando do Calibre para converter os ebooks. Ao final, você terá um livro convertido com a mesma qualidade do Calibre mesmo longe de um computador. 
+
+Uma versão de demonstração pode ser encontrada em http://libry.dotins.eu.org. Os passos abaixo fornecem um passo-a-passo para a execução da ferramenta em ambiente próprio. 
+
+
+
+# Para Instalar em seu ambiente:
+
+Se estiver familiarizado com Docker, talvez a [imagem no DockerHub](https://hub.docker.com/r/martindoug/libry) lhe seja mais prático. Está disponível tanto para processadores AMD ou ARM64. Se desejar, pode seguir os passos abaixo para instalar sem Docker:
 
 
 
@@ -20,7 +31,7 @@ A motivação para o desenvolvimento dessa ferramenta advém da dificuldade de e
 - Calibre instalado localmente (versão 5.14 foi utilizada em desenvolvimento)
 - Endereço de email disponível para enviar os arquivos (Gmail, Yahoo, Outlook, etc ou provedor próprio)
 
-> OBS: Desenvolvido utilizando o Pop OS! 20.10, testado no Ubuntu 20.04 LTS
+> OBS: Desenvolvido utilizando o Pop OS! 20.10, executando em produção no Ubuntu 20.04 LTS
 
 
 
@@ -36,7 +47,6 @@ A motivação para o desenvolvimento dessa ferramenta advém da dificuldade de e
 
    Verifique se o resultado exibido é similar a `calibre (calibre 5.14)` e continue.
    
-
 3. Instale as dependências desse projeto
 
    ```
@@ -52,4 +62,5 @@ A motivação para o desenvolvimento dessa ferramenta advém da dificuldade de e
    ```
 
 6. Abra seu navegador e acesse o projeto: http://localhost:4000/
+
 
